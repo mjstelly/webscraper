@@ -1,26 +1,20 @@
-from src.scrapers.ebay_scraper import get_ebay_items
-from src.config.settings import BASE_URL
+from src.scrapers.ebay_scraper import get_ebay_items, save_to_csv
 
 def main():
-    # Prompt the user for a search term and the number of pages to scrape
-    search = "ceramic"  # Using "ceramic" for debugging purposes
-    pages = 2  # Checking the URL for page 2
-
-    # Construct and print the URL to check correctness
-    test_url = BASE_URL.format(search, pages)
-    print(f"Generated URL: {test_url}")
-
-    # Use the eBay scraper function to get the items
+    search = "ceramic pottery"
+    pages = 2
+    
+    # Fetch eBay items
+    print("Starting to scrape eBay items...")
     items = get_ebay_items(search, pages)
     
-
-    # Display the results
-    if items:
-        print(f"\nFound {len(items)} items:\n")
-        for idx, item in enumerate(items, start=1):
-            print(f"{idx}. {item['title']} - {item['price']} ({item['shipping']})")
-    else:
-        print("No items found.")
+    # Check if items were fetched
+    print(f"Number of items fetched: {len(items)}")
+    
+    # Save to CSV with a dynamic filename based on search term
+    print("Calling save_to_csv function...")
+    save_to_csv(items, search_query=search)
+    print("CSV saving completed.")
 
 if __name__ == "__main__":
     main()
