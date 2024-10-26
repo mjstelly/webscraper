@@ -1,0 +1,17 @@
+# Virtual environment
+webscrape-env/
+
+# Python cache files
+__pycache__/
+*.py[cod]
+
+# VS Code settings
+.vscode/
+.history
+
+# Environment files
+*.env
+
+# macOS system files
+.DS_Store
+
